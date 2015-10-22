@@ -1,0 +1,14 @@
+@extends('layouts.Principal')
+@section('contenido')
+<br>
+<br>
+<br>
+<br>
+<br>
+---Contenido---
+<br>
+<br>
+<br>
+<br>
+<br>
+@stop

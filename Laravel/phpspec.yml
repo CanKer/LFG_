@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: LFG
+        psr4_prefix: LFG
+        src_path: app
