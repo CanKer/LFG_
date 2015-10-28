@@ -1,25 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="Dashboard">
+
   <head>
+    <title>LFG &mdash; Tus ideas hechas realidad</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
     <meta charset="utf-8">
-    <title>Documento</title>
+
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"/>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Favicons -->
+    <link href="images/favicon.png" rel="shortcut icon">
+    <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+    <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+
+    <!-- CSS -->
+    <link href="css/styletl.css" media="screen" rel="stylesheet"/>
+    <link href="css/materialize.css" media="screen" rel="stylesheet"/>
+
+    <link href="css/bootstrap.min.css" media="screen" rel="stylesheet"/>
+    <link href="css/estilos.css" media="screen" rel="stylesheet"/>
+
   </head>
-  <body ng-app="Client">
-<div ng-view></div>
-{{"hola"}}
+  <body ng-controller="MainController">
+  <div ng-view></div>
 
 
-<!--Components-->
-<script type="text/javascript" src="components/angular.min.js"></script>
-<script type="text/javascript" src="components/angular-resource.min.js"></script>
-<script type="text/javascript" src="components/angular-route.min.js"></script>
-<!--Scripts-->
-<script type="text/javascript" src="scripts/router.js"></script>
-<!--Controller-->
-<script type="text/javascript" src="scripts/controllers/user.js"></script>
-<!--Services-->
-<script type="text/javascript" src="scripts/services/UsuarioService.js"></script>
-<!--Assets-->
-<script type="text/javascript" src="assets/js/jquery.js"></script>
+
+
+
+
+    <script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <!--Components-->
+    <script type="text/javascript" src="components/angular.min.js"></script>
+    <script type="text/javascript" src="components/angular-resource.min.js"></script>
+    <script type="text/javascript" src="components/angular-route.min.js"></script>
+
+    <script src="js/angular-materialize.js" type="text/javascript"></script>
+    <script src="js/materialize.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/router.js"></script>
+    <script src="js/control.js" type="text/javascript"></script>
+    <script src="js/UsuarioService.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/app.js" type="text/javascript"></script>
   </body>
+
 </html>

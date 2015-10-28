@@ -5,12 +5,18 @@ namespace LFG\Http\Controllers;
 use Illuminate\Http\Request;
 use LFG\Http\Requests;
 use LFG\Http\Controllers\Controller;
-use LFG\Users;
+use Illuminate\Routing\Route;
+use LFG\User;
 
 class UsuariosController extends Controller
 {
     public function __construct() {
       $this->middleware('cors');
+      $this->beforeFilter('@find', ['only' => ['show','update','destroy']]);
+    }
+
+    public function find(Route $route)  {
+      $this->user = User::find($route->getParameter('users'));
     }
     /**
      * Display a listing of the resource.
@@ -19,7 +25,8 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-  //      return view('account');
+        $user = User::all();
+        return response()->json($user->toArray());
     }
 
     /**
@@ -39,15 +46,8 @@ class UsuariosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-    /*  \LFG\User::create([
-        'user' => $request['user'],
-        'email' => $request['email'],
-        'password' => $request['password'],
-        ]);
-        return "Usuario registrado"; */
 
         Users::create($request->all());
-
         return response()->json(["mensaje" => "Usuario creado correctamente"]);
 
     }
@@ -58,10 +58,11 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id) {
+        return response()->json($this->user);
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -83,7 +84,9 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->user->fill($request->all());
+        $this->user->save();
+        return response()->json(["mensaje" => "actualizado"]);
     }
 
     /**
@@ -94,6 +97,7 @@ class UsuariosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->user->delete();
+        return response()->json(["mensaje" => "borrado"]);
     }
 }

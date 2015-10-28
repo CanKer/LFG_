@@ -1,0 +1,228 @@
+<div class="wrapper">
+
+  <div class="box">
+    <div class="row">
+
+      <!-- sidebar -->
+      <div class="column col-sm-3" id="sidebar">
+        <p class="nav-title">
+          Dashboard
+          <a class="pull-right" href="#">
+            <i class="glyphicon glyphicon-folder-open"></i>
+          </a>
+        </p>
+        <ul class="nav">
+          <li ng-class="{active: isCurrentCategory(categoria)}" ng-repeat="categoria in categorias">
+            <a href="#/dashboard" ng-click="setCurrentCategory(categoria)">
+              <i class="material-icons">keyboard_arrow_right</i>
+              <i class="glyphicon glyphicon-tags"></i>
+              {{categoria}}</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /sidebar -->
+
+      <!-- main here -->
+      <div class="column col-sm-9" id="main">
+        <div class="padding">
+          <div class="full col-sm-9">
+
+            <!-- content -->
+            <h2>
+              {{currentCategory}}
+            </h2>
+            <div class="waves-effect waves-light material-icons prefix col-xs-6 pull-left">Buscar</i>
+            <input ng-model="search" placeholder="Busqueda" type="text">
+          </div>
+          <div class="pull-right">
+            <!-- Button trigger modal -->
+            <button class="btn pull-right waves-effect waves-light" data-target="#myModal" data-toggle="modal" type="button">Agregar</button>
+          </div>
+          <br/>
+          <br/>
+
+          <ul class="collapsible popout" data-collapsible="accordion" watch>
+            <li ng-repeat="User in UsersV | filter:search">
+              <!--| filter: {category: currentCategory}-->
+              <div class="collapsible-header">
+                <i class="{{single.icon}}"></i>
+                <a>{{User.user}}</a>
+                <a href="#">
+                  <i class="material-icons" ng-click="removeUser(User.id)">delete</i>
+                </a>
+                <a data-target="#myModal" data-toggle="modal" href="#/dashboard/{{User.id}}">
+                  <i class="material-icons">edit</i><br/></a>
+              </div>
+              <div class="collapsible-body">
+                <p>{{User.user}}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- /col-9 -->
+      </div>
+      <!-- /padding -->
+    </div>
+
+    <!-- /main here -->
+
+  </div>
+</div>
+
+</div>
+
+<!-- Modal Ideas -->
+<div aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <form class="col-xs-12" id="agregarForm">
+          <div class="row">
+            <div class="input-field col-xs-12">
+              <input class="validate" id="last_name" ng-model="User.user" type="text" value="{{Users.id}}">
+              <label for="last_name">Nombre:</label>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="row">
+              <div class="input-field col-xs-12">
+                <textarea class="materialize-textarea" id="icon_prefix2" ng-model="User.password">{{Users.password}}</textarea>
+                <label for="icon_prefix2">Descripción</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="saveUser()">Guardar</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Modal Entradas -->
+<div aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <form class="col-xs-12" id="agregarForm">
+          <div class="row">
+            <div class="input-field col-xs-12">
+              <input class="validate" id="last_name" ng-model="User.user" type="text" value="{{Users.id}}">
+              <label for="last_name">Nombre:</label>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="row">
+              <div class="input-field col-xs-12">
+                <textarea class="materialize-textarea" id="icon_prefix2" ng-model="User.password">{{Users.password}}</textarea>
+                <label for="icon_prefix2">Descripción</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="saveUser()">Guardar</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Modal Foro -->
+<div aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <form class="col-xs-12" id="agregarForm">
+          <div class="row">
+            <div class="input-field col-xs-12">
+              <input class="validate" id="last_name" ng-model="User.user" type="text" value="{{Users.id}}">
+              <label for="last_name">Nombre:</label>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="row">
+              <div class="input-field col-xs-12">
+                <textarea class="materialize-textarea" id="icon_prefix2" ng-model="User.password">{{Users.password}}</textarea>
+                <label for="icon_prefix2">Descripción</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="saveUser()">Guardar</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Modal User -->
+<div aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <form class="col-xs-12" id="agregarForm">
+          <div class="row">
+            <div class="input-field col-xs-12">
+              <input class="validate" id="last_name" ng-model="User.user" type="text" value="{{Users.id}}">
+              <label for="last_name">Nombre:</label>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="row">
+              <div class="input-field col-xs-12">
+                <textarea class="materialize-textarea" id="icon_prefix2" ng-model="User.password">{{Users.password}}</textarea>
+                <label for="icon_prefix2">Descripción</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="saveUser()">Guardar</a>
+    </div>
+  </div>
+</div>
+</div>

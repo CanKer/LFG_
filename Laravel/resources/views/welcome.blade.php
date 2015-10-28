@@ -17,6 +17,7 @@
                 display: table;
                 font-weight: 100;
                 font-family: 'Lato';
+                background-color: black;
             }
 
             .container {
@@ -32,13 +33,14 @@
 
             .title {
                 font-size: 96px;
+                color: white;
             }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title">"LFG"</div>
             </div>
         </div>
     </body>

@@ -16,6 +16,7 @@ class CreateIdeasTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('descripcion');
+            $table->SoftDeletes();
             $table->timestamps();
         });
     }
