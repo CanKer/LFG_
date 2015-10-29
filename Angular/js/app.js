@@ -2,55 +2,44 @@
    "use strict";
 
    var app = angular.module('Dashboard')
-     .controller('MainController', function($scope, UserResource, $location) {
-       $scope.name = "CanKer";
-       $scope.categorias = ['Users', 'Entradas', 'Conocimientos', 'Grupos'];
-       //bookmarks
-       $scope.currentCategory = "Users";
-       $scope.setCurrentCategory = function(category) {
-         $scope.currentCategory = category;
+
+   .factory('UserResource', function($resource) {
+     return $resource("http://localhost:8000/ideas/:id", {
+       id: "@id"
+     }, {
+       update: {
+         method: "PUT"
        }
-       $scope.isCurrentCategory = function(category) {
-         return $scope.currentCategory === category;
-       }
-
-
-       //   console.log($routeParams.id);
-       //para ver a los usuarios
-       $scope.Users = UserResource.query();
+     });
+   })
 
 
 
+   .controller('MainController', function($scope, UserResource, $location) {
+     $scope.name = "CanKer";
 
-     })
-     .controller('CreateController', function($scope, UserResource, $location, $timeout) {
+     $scope.Ideas = UserResource.query();
 
-       $scope.User = {};
+     $scope.categorias = ['Users', 'Ideas', 'Entradas', 'Conocimientos', 'Grupos'];
+     $scope.currentCategory = "Ideas";
+     $scope.setCurrentCategory = function(category) {
+       $scope.currentCategory = category;
+     }
+     $scope.isCurrentCategory = function(category) {
+       return $scope.currentCategory === category;
+     }
 
-       $scope.saveUser = function() {
-         console.log($scope.Users);
-         UserResource.save($scope.User);
-         Materialize.toast('Usuario registrado', 5000, 'green accent-4')
-       }
+     $scope.save = function(Ideas) {
+       var guardarIdea = new UserResource();
 
-     })
-     .controller('EditController', function($scope, UserResource, $location, $timeout, $routeParams) {
-       $scope.User = UserResource.get({
-         id: $routeParams.id
+       guardarIdea.nombre = Ideas.nombre;
+       guardarIdea.descripcion = Ideas.descripcion;
+
+       guardarIdea.$save(function(response) {
+         $scope.Ideas.push(guardarIdea);
        });
 
-       console.log($routeParams.id);
-
-
-       $scope.saveUser = function() {
-         console.log("hola2");
-
-         console.log($scope.UsersE);
-         UserResource.update($scope.Users);
-         Materialize.toast('Usuario editado', 5000, 'green accent-4')
-       };
-
-     });
+     }
 
 
 
@@ -58,9 +47,9 @@
 
 
 
+   });
 
 
-   // console.log(app);
  })();
 
 
@@ -68,7 +57,38 @@
 
 
 
+ /*
+ .controller('CreateController', function($scope, UserResource, $location, $timeout) {
 
+   $scope.User = {};
+
+   $scope.saveUser = function() {
+     console.log($scope.Users);
+     UserResource.save($scope.User);
+     Materialize.toast('Usuario registrado', 5000, 'green accent-4')
+   }
+
+ })
+ .controller('EditController', function($scope, UserResource, $location, $timeout, $routeParams) {
+   $scope.User = UserResource.get({
+     id: $routeParams.id
+   });
+
+   console.log($routeParams.id);
+
+
+   $scope.saveUser = function() {
+     console.log("hola2");
+
+     console.log($scope.UsersE);
+     UserResource.update($scope.Users);
+     Materialize.toast('Usuario editado', 5000, 'green accent-4')
+   };
+
+ });  */
+
+
+ // console.log(app);
 
 
  /* $scope.bookmarks = [
