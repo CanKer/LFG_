@@ -1,0 +1,185 @@
+<div class="wrapper">
+
+  <div class="box">
+    <div class="row">
+
+      <!-- sidebar -->
+      <div class="column col-xs-3" id="sidebar">
+        <p class="nav-title">
+          Dashboard
+          <a class="pull-right" href="#">
+            <i class="glyphicon glyphicon-folder-open"></i>
+          </a>
+        </p>
+        <ul class="nav">
+          <li ng-class="{active: isCurrentCategory(categoria)}" ng-repeat="categoria in categorias">
+            <a href="#/dashboard/{{categoria}}" ng-click="setCurrentCategory(categoria)">
+              <i class="material-icons">keyboard_arrow_right</i>
+              <i class="glyphicon glyphicon-tags"></i>
+              {{categoria}}</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /sidebar -->
+
+      <!-- main here -->
+      <div class="column col-xs-9" id="main">
+        <div class="padding">
+          <div class="full col-sm-9">
+
+            <!-- content -->
+            <h2>
+              {{currentCategory}}
+            </h2>
+            <div class="tablaAccion row">
+              <div class="waves-effect waves-light material-icons prefix col-xs-6 pull-left">Buscar</i>
+              <input ng-model="search" placeholder="Busqueda" type="text">
+            </div>
+            <div class="pull-right col-xs-6">
+              <!-- Button trigger modal -->
+              <button class="btn pull-right waves-effect waves-light" data-target="#IdeasM" data-toggle="modal" type="button">Agregar</button>
+            </div>
+            </div>
+
+
+          <div class="tablaContenido row">
+            <div class="col-xs-12">
+              <ul class="collapsible popout" data-collapsible="accordion" watch>
+                <li ng-repeat="Idea in Ideas | filter:search">
+                  <!--| filter: {category: currentCategory}-->
+                  <div class="collapsible-header">
+                    <i class="{{single.icon}}"></i>
+                    <a>{{Idea.nombre}}</a>
+                    <a href="#">
+                      <i class="material-icons" ng-click="removeUser(User.id)">delete</i>
+                    </a>
+                    <a data-target="#myModal" data-toggle="modal" href="#/dashboard/{{User.id}}">
+                      <i class="material-icons">edit</i><br/></a>
+                  </div>
+                  <div class="collapsible-body">
+                    <p>{{Idea.descripcion}}</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- /col-9 -->
+      </div>
+      <!-- /padding -->
+    </div>
+
+    <!-- /main here -->
+
+  </div>
+</div>
+
+</div>
+
+
+<!-- Modal User -->
+<div aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <form class="col-xs-12" id="agregarForm">
+          <div class="row">
+            <div class="input-field col-xs-12">
+              <input class="validate" id="last_name" ng-model="User.user" type="text" value="{{Users.id}}">
+              <label for="last_name">Nombre:</label>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="row">
+              <div class="input-field col-xs-12">
+                <textarea class="materialize-textarea" id="icon_prefix2" ng-model="User.password">{{Users.password}}</textarea>
+                <label for="icon_prefix2">Descripción</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="saveUser()">Guardar</a>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+<!-- User form -->
+  <div class="modal fade" id="IdeasM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">Bookmark</h4>
+        </div>
+        <div class="modal-body">
+
+          <form name="bookmarkForm" id="bookmarkForm">
+            <p>Please enter the title and the url for your bookmark, all fields are required.</p>
+
+            <div class="form-group">
+              <label for="category">Category</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="glyphicon glyphicon-folder-open"></i>
+                </div>
+                <select ng-model="Ideas.nombre" ng-options="value for value in categories" id="category" class="form-control">
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" ng-class="">
+              <label for="title">Title</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="glyphicon glyphicon-bookmark"></i>
+                </div>
+                <input ng-model="Ideas.nombre" ng-required="true" name="title" id="title" class="form-control" type="text" placeholder="Enter the title">
+                <span ng-if="" class="glyphicon glyphicon-remove form-control-feedback"></span>
+              </div>
+              <span ng-if="" class="help-block">El título es requerido.</span>
+            </div>
+
+            <div class="form-group" ng-class="">
+              <label for="url">URL</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="glyphicon glyphicon-link"></i>
+                </div>
+                <input ng-model="Ideas.descripcion" required minlength="3" maxlength="200" name="url" id="url" class="form-control" type="text" placeholder="Enter the URL">
+                <span ng-if="" class="glyphicon glyphicon-remove form-control-feedback"></span>
+              </div>
+
+            </div>
+
+
+
+
+          </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button ng-click="save(Ideas)" type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

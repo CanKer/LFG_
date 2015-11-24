@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('pais');
             $table->string('estado');
             $table->string('ciudad');
+            $table->float('lat');
+            $table->float('long');
             $table->SoftDeletes();
             $table->rememberToken();
             $table->timestamps();

@@ -3,25 +3,34 @@
 
    var app = angular.module('Dashboard')
 
-   .factory('UserResource', function($resource) {
-     return $resource("http://localhost:8000/ideas/:id", {
-       id: "@id"
-     }, {
-       update: {
-         method: "PUT"
-       }
-     });
+   .service('Category', function($http) {
+
+     this.getAll = function(success, failure) {
+       $http.get('http://localhost:8000/mCategory')
+         .success(success)
+         .error(failure);
+     }
    })
 
-
-
-   .controller('MainController', function($scope, UserResource, $location) {
+   .controller('MainController', function($scope, UsersResource, IdeasResource, EntradasResource, mCategory, Category, $location) {
      $scope.name = "CanKer";
+     Category.getAll(function(data) {
+       $scope.categories = data.categories;
+       $scope.currentCategory = data.categories[0];
+       $scope.Categorias = mCategory.query();
+       $scope.Ideas = IdeasResource.query();
+       $scope.Users = UsersResource.query();
+       $scope.Entradas = EntradasResource.query();
+     });
 
-     $scope.Ideas = UserResource.query();
 
-     $scope.categorias = ['Users', 'Ideas', 'Entradas', 'Conocimientos', 'Grupos'];
-     $scope.currentCategory = "Ideas";
+
+
+     //   $scope.categorias = ['Usuarios', 'Ideas', 'Entradas', 'Conocimientos', 'Grupos', 'Estadisticas'];
+     //   $scope.currentCategory = "Ideas";
+
+
+
      $scope.setCurrentCategory = function(category) {
        $scope.currentCategory = category;
      }
@@ -30,7 +39,7 @@
      }
 
      $scope.save = function(Ideas) {
-       var guardarIdea = new UserResource();
+       var guardarIdea = new IdeasResource();
 
        guardarIdea.nombre = Ideas.nombre;
        guardarIdea.descripcion = Ideas.descripcion;

@@ -23,3 +23,4 @@ Route::resource('pruebas', 'PruebasController');
 Route::resource('users', 'UsuariosController');
 Route::resource('account', 'AccountController');
 Route::resource('foro', 'ForoController');
+Route::resource('mCategory', 'mCategoryController');

@@ -28,12 +28,6 @@ class UsuariosController extends Controller
         $user = User::all();
         return response()->json($user->toArray());
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
   //      return view('account.create');

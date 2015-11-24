@@ -18,22 +18,12 @@ class AccountController extends Controller
     public function find(Route $route)  {
       $this->user = User::find($route->getParameter('account'));
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $user = User::all();
         return response()->json($user->toArray());
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
   //      return view('account.create');

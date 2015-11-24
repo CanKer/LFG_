@@ -7,8 +7,16 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading-font{font-family:"Open Sans",
 html, body {
    height: 100%;
    font-family:'Open Sans',arial,sans-serif;
+   background-color: black;
+   color: white;
 }
-
+.wrap {
+  background-color: black;
+  color: white;
+}
+p {
+  color: white;
+}
 .header{
     background-color: #1582dc;
     min-height: 50px;
